@@ -18,7 +18,5 @@ public class ChessGame extends BoardGame {
 
     }
 
-    private void placeKing(int row, ChessBoard chessBoard) {
-        chessBoard.setPiece();
-    }
+
 }
