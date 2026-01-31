@@ -34,12 +34,21 @@ public abstract class Piece {
         return color;
     }
 
+    public String getColorSymbol() {
+    return (color.equals(Color.WHITE) ? "W" : "B");
+    }
+
     public PieceName getPieceName() {
         return pieceName;
     }
 
     public boolean isFirstMove() {
         return movesDone.isEmpty();
+    }
+
+
+    public String getPieceSymbol() {
+        return this.getColorSymbol() + this.getPieceName().toString();
     }
 
     protected boolean canMove(Cell start, Cell end) {
