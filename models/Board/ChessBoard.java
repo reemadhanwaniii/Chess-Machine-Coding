@@ -30,9 +30,9 @@ public class ChessBoard implements Board {
         for(int r=0;r<rc;r++) {
             for(int c=0;c<cc;c++) {
                 if(board.get(r).get(c).hasPiece()) {
-                    System.out.print(board.get(r).get(c).getPiece().get().getPieceSymbol() + " | ");
+                    System.out.print(board.get(r).get(c).getPiece().get().getPieceSymbol() + "|");
                 }else {
-                    System.out.print(" ___ | ");
+                    System.out.print("___|");
                 }
             }
             System.out.println();

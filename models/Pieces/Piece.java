@@ -48,7 +48,8 @@ public abstract class Piece {
 
 
     public String getPieceSymbol() {
-        return this.getColorSymbol() + this.getPieceName().toString();
+        String pieceName = this.getPieceName().toString();
+        return this.getColorSymbol() + pieceName.toString().substring(0,1)+pieceName.toString().substring(pieceName.length()-1);
     }
 
     protected boolean canMove(Cell start, Cell end) {
