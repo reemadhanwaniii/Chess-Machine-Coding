@@ -3,6 +3,7 @@ package models.Pieces;
 import exceptions.InvalidPieceMoveException;
 import models.Board.Cell;
 import models.Helpers.Color;
+import models.Helpers.Direction;
 
 public class Pawn extends Piece implements ChessPiece {
 
@@ -16,6 +17,11 @@ public class Pawn extends Piece implements ChessPiece {
     public void makeMove(Cell startCell, Cell endCell) {
 
     }
+    //    @Override
+//    public boolean isKilled() {
+//        return super.isKilled();
+//    }
+
 
 //    @Override
 //    public void setKilled(boolean killed) {
@@ -34,27 +40,32 @@ public class Pawn extends Piece implements ChessPiece {
          *   then it can move in the positive direction of y-axis
          */
 
-        if(startCell.getVerticalDistance(endCell) > 2) {
-            throw new InvalidPieceMoveException("Invalid move ");
-        }
-        if(!isFirstMove() && startCell.getVerticalDistance(endCell) == 2) {
-            throw new InvalidPieceMoveException("Invalid move from " + startCell + " to " + endCell);
-        }
 
-        if(endCell.hasPiece() && !(isMovingDiagonally(startCell, endCell))) {
+//        write implementation for positive first in what all cases it move and for rest it returns false
+
+        Direction direction = getMovementDirection(startCell, endCell);
+
+        if(!isDirectionValidForPawn(direction)) {
             throw new InvalidPieceMoveException("Invalid move for pawn");
         }
 
-        if(isMovingHorizontally(startCell, endCell)) {
-            throw new InvalidPieceMoveException("Invalid move for pawn");
+
+        if(isMovingVertically(startCell,endCell) && !endCell.hasPiece()) {
+            if(startCell.getVerticalDistance(endCell) ==2 && isFirstMove()) {
+                // TODO: Once we have the board class then also check if path is empty or not ?
+                return true;
+            }
+            else if(startCell.getVerticalDistance(endCell) == 1) return true;
+            else return false;
+        }
+        if(isMovingDiagonally(startCell,endCell) &&
+                endCell.hasPiece() &&
+                endCell.getPiece().get().getColor() != this.getColor()) {
+            return true;
         }
         return false;
     }
 
-//    @Override
-//    public boolean isKilled() {
-//        return super.isKilled();
-//    }
 
     @Override
     public void listPossibleMoves(Cell currentCell) {
@@ -62,4 +73,13 @@ public class Pawn extends Piece implements ChessPiece {
     }
 
 
+    private boolean isDirectionValidForPawn(Direction direction) {
+        if(this.getColor().equals(Color.WHITE)) {
+            return direction.equals(Direction.FORWARD_Y) || direction.equals(Direction.DIAGONAL_FORWARD_LEFT) ||
+                    direction.equals(Direction.DIAGONAL_FORWARD_RIGHT);
+        } else {
+            return direction.equals(Direction.BACKWARD_Y) || direction.equals(Direction.DIAGONAL_BACKWARD_LEFT) ||
+                    direction.equals(Direction.DIAGONAL_BACKWARD_RIGHT);
+        }
+    }
 }

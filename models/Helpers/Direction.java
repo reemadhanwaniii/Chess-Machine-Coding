@@ -1,0 +1,13 @@
+package models.Helpers;
+
+public enum Direction {
+    FORWARD_X,
+    FORWARD_Y,
+    BACKWARD_X,
+    BACKWARD_Y,
+    NONE,
+    DIAGONAL_BACKWARD_LEFT,
+    DIAGONAL_BACKWARD_RIGHT,
+    DIAGONAL_FORWARD_LEFT,
+    DIAGONAL_FORWARD_RIGHT;
+}
