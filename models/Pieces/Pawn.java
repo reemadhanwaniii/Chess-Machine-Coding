@@ -4,6 +4,12 @@ import exceptions.InvalidPieceMoveException;
 import models.Board.Cell;
 import models.Helpers.Color;
 import models.Helpers.Direction;
+import models.Pieces.Strategy.DiagonalMovementStrategy;
+import models.Pieces.Strategy.HorizontalMovementStrategy;
+import models.Pieces.Strategy.PawnVerticalMovementStrategy;
+import models.Pieces.Strategy.VerticalMovementStrategy;
+
+import java.util.Arrays;
 
 public class Pawn extends Piece implements ChessPiece {
 
@@ -11,6 +17,7 @@ public class Pawn extends Piece implements ChessPiece {
 
     public Pawn(PieceName pieceName, Color pieceColor) {
         super(pieceName,pieceColor);
+        this.movementStrategies = Arrays.asList(new PawnVerticalMovementStrategy(),new DiagonalMovementStrategy());
     }
 
     @Override
@@ -43,27 +50,11 @@ public class Pawn extends Piece implements ChessPiece {
 
 //        write implementation for positive first in what all cases it move and for rest it returns false
 
-        Direction direction = getMovementDirection(startCell, endCell);
-
-        if(!isDirectionValidForPawn(direction)) {
-            throw new InvalidPieceMoveException("Invalid move for pawn");
-        }
-
-
-        if(isMovingVertically(startCell,endCell) && !endCell.hasPiece()) {
-            if(startCell.getVerticalDistance(endCell) ==2 && isFirstMove()) {
-                // TODO: Once we have the board class then also check if path is empty or not ?
-                return true;
-            }
-            else if(startCell.getVerticalDistance(endCell) == 1) return true;
-            else return false;
-        }
-        if(isMovingDiagonally(startCell,endCell) &&
-                endCell.hasPiece() &&
-                endCell.getPiece().get().getColor() != this.getColor()) {
+        if(super.canMove(startCell, endCell)) {
             return true;
         }
-        return false;
+
+        throw new InvalidPieceMoveException("Invalid pawn movement");
     }
 
 

@@ -3,6 +3,7 @@ package models.Pieces;
 import models.Board.Cell;
 import models.Helpers.Color;
 import models.Helpers.Direction;
+import models.Pieces.Strategy.MovementStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public abstract class Piece {
     private final Color color;
     private final PieceName pieceName;
     private List<Move> movesDone;
+    protected List<MovementStrategy> movementStrategies;
 
     public Piece(PieceName pieceName,Color color) {
         this.killed = false;
@@ -38,6 +40,10 @@ public abstract class Piece {
 
     public boolean isFirstMove() {
         return movesDone.isEmpty();
+    }
+
+    protected boolean canMove(Cell start, Cell end) {
+        return movementStrategies.stream().anyMatch(strategy -> strategy.canMove(start, end));
     }
 
     protected boolean isMovingDiagonally(Cell start, Cell end) {
@@ -77,6 +83,6 @@ public abstract class Piece {
         if(x == -1 && y == -1) {
             return Direction.DIAGONAL_BACKWARD_LEFT;
         }
-        return Direction.DIAGONAL;
+        return Direction.NONE;
     }
 }
