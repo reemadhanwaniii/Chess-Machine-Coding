@@ -18,7 +18,7 @@ public class Pawn extends Piece implements ChessPiece {
 
     public Pawn(PieceName pieceName, Color pieceColor,String pieceSymbol) {
         super(pieceName,pieceColor,pieceSymbol);
-        this.movementStrategies = Arrays.asList(new PawnVerticalMovementStrategy(),new DiagonalMovementStrategy());
+        this.movementStrategies = Arrays.asList(new PawnVerticalMovementStrategy(this),new DiagonalMovementStrategy());
     }
 
     @Override

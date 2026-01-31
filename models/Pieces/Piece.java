@@ -51,8 +51,9 @@ public abstract class Piece {
 
 
     public String getPieceSymbol() {
-        String pieceName = this.getPieceName().toString();
-        return this.getColorSymbol() + pieceName.toString().substring(0,1)+pieceName.toString().substring(pieceName.length()-1);
+//        String pieceName = this.getPieceName().toString();
+//        return this.getColorSymbol() + pieceName.toString().substring(0,1)+pieceName.toString().substring(pieceName.length()-1);
+        return this.pieceSymbol;
     }
 
     protected boolean canMove(Cell start, Cell end, ChessBoard board) {
