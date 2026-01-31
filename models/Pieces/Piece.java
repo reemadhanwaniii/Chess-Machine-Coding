@@ -1,6 +1,7 @@
 package models.Pieces;
 
 import models.Board.Cell;
+import models.Board.ChessBoard;
 import models.Helpers.Color;
 import models.Helpers.Direction;
 import models.Pieces.Strategy.MovementStrategy;
@@ -12,14 +13,16 @@ public abstract class Piece {
     private boolean killed;
     private final Color color;
     private final PieceName pieceName;
+    private final String pieceSymbol;
     private List<Move> movesDone;
     protected List<MovementStrategy> movementStrategies;
 
-    public Piece(PieceName pieceName,Color color) {
+    public Piece(PieceName pieceName,Color color,String pieceSymbol) {
         this.killed = false;
         this.pieceName = pieceName;
         this.color = color;
         this.movesDone = new ArrayList<>();
+        this.pieceSymbol = pieceSymbol;
     }
 
     public boolean isKilled() {
@@ -52,8 +55,8 @@ public abstract class Piece {
         return this.getColorSymbol() + pieceName.toString().substring(0,1)+pieceName.toString().substring(pieceName.length()-1);
     }
 
-    protected boolean canMove(Cell start, Cell end) {
-        return movementStrategies.stream().anyMatch(strategy -> strategy.canMove(start, end));
+    protected boolean canMove(Cell start, Cell end, ChessBoard board) {
+        return movementStrategies.stream().anyMatch(strategy -> strategy.canMove(start, end,board));
     }
 
     protected boolean isMovingDiagonally(Cell start, Cell end) {

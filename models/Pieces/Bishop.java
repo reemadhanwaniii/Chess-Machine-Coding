@@ -5,25 +5,20 @@ import models.Board.Cell;
 import models.Board.ChessBoard;
 import models.Helpers.Color;
 import models.Pieces.Strategy.DiagonalMovementStrategy;
-import models.Pieces.Strategy.HorizontalMovementStrategy;
-import models.Pieces.Strategy.PawnVerticalMovementStrategy;
-import models.Pieces.Strategy.VerticalMovementStrategy;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class Rook extends Piece implements ChessPiece{
-
-    public Rook(PieceName name, Color color, String symbol) {
+public class Bishop extends Piece implements ChessPiece{
+    public Bishop(PieceName name, Color color, String symbol) {
         super(name, color, symbol);
-        this.movementStrategies = Arrays.asList(new VerticalMovementStrategy(), new HorizontalMovementStrategy());
+        this.movementStrategies = List.of(new DiagonalMovementStrategy());
     }
 
     @Override
     public void makeMove(Cell startingCell, Cell endingCell) {
 
     }
-
-
 
     @Override
     public boolean canMove(Cell startingCell, Cell endingCell, ChessBoard board) {
@@ -32,12 +27,11 @@ public class Rook extends Piece implements ChessPiece{
             return true;
         }
 
-        throw new InvalidPieceMoveException("Invalid move for Rook");
+        throw new InvalidPieceMoveException("Invalid move for Bishop");
     }
 
     @Override
     public void listPossibleMoves(Cell currentCell) {
 
     }
-
 }
