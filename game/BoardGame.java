@@ -18,12 +18,16 @@ public abstract class BoardGame {
 
     public abstract void showBoard();
     protected abstract boolean isGameOver();
-    public void startGame() {
+    public void startGame() throws Exception{
 //        TODO : implement start of the game
         while(true) {
             Player current = players.poll(); // get the current player
             // take a move decision from thr player
             Move move = current.makeMove();
+
+            if(move == null) {
+                throw new Exception("Invalid Move");
+            }
 
             this.board.applyMove(move);
 
