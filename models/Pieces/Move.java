@@ -18,4 +18,6 @@ public class Move {
     public Cell getDestinationCell() {
         return destinationCell;
     }
+
+
 }

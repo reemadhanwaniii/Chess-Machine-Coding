@@ -17,7 +17,7 @@ public class King extends Piece implements ChessPiece{
         this.movementStrategies = Arrays.asList(new VerticalMovementStrategy(),new HorizontalMovementStrategy(),new DiagonalMovementStrategy());
     }
     @Override
-    public void makeMove(Cell startingCell, Cell endingCell) {
+    public void makeMove(Cell startingCell, Cell endingCell, ChessBoard board) {
 
     }
 

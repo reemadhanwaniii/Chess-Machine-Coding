@@ -16,7 +16,7 @@ public class Knight extends Piece implements ChessPiece{
         this.movementStrategies = Arrays.asList(new KnightMovementStrategy());
     }
     @Override
-    public void makeMove(Cell startingCell, Cell endingCell) {
+    public void makeMove(Cell startingCell, Cell endingCell, ChessBoard board) {
 
     }
 
